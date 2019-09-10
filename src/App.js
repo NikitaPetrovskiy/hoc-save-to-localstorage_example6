@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import {TextInput} from "./Components/TextInput";
+import {withLocalStorage} from "./Components/hoc/withLocalStorage";
 import './App.css';
 
-function App() {
+const InputWithLocalStorage = withLocalStorage(TextInput, 'test')
+const InputWithLocalStorageToo = withLocalStorage(TextInput, 'test2')
+const onClick = e => e.preventDefault();
+
+const App = (props) => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <InputWithLocalStorage className="autocomplete">
+            <input type="submit" value="Отправить" onClick={onClick}/>
+        </InputWithLocalStorage>
+      <InputWithLocalStorageToo className="autocomplete" placeholder='save to localStorage'>
+          <input type="submit" value="Отправить" onClick={onClick}/>
+      </InputWithLocalStorageToo>
     </div>
   );
 }
