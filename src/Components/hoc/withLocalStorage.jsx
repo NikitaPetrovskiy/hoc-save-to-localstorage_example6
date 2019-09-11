@@ -1,8 +1,12 @@
 import React from 'react';
 
+const getDisplayName = (Component) => {
+    return Component.displayName || Component.name ||
+        'Component';
+}
+
 export const withLocalStorage = (Component, storageKey) => {
-    return class extends React.Component {
-        static displayName = '_withLocalStorage';
+    class WithLocalStorage extends React.Component {
         constructor(props) {
             super(props);
             this.state = {
@@ -10,21 +14,10 @@ export const withLocalStorage = (Component, storageKey) => {
             }
             this.handleChange = this.handleChange.bind(this);
             this.saveToLocalStorage = this.saveToLocalStorage.bind(this);
-            // this.returnValuesStorage = this.returnValuesStorage.bind(this);
-        }
-        componentDidMount() {
-            // this.returnValuesStorage();
         }
         saveToLocalStorage(e) {
             localStorage.setItem(storageKey, e.target.value || this.state.value);
         }
-
-        // это я решил поэксперементировать
-        // возвращает значение из localStorage в input
-        // returnValuesStorage() {
-        //     this.setState({value: localStorage.getItem(storageKey) || ''});
-        // }
-
         handleChange(e) {
             const target = e.target.value;
             this.setState({value: target})
@@ -32,9 +25,11 @@ export const withLocalStorage = (Component, storageKey) => {
         }
         render() {
             return (
-                <Component {...this.state} {...this.props}
-                           value={this.state.value} onChange={this.handleChange} />
+                <Component {...this.props} value={this.state.value}
+                           onChange={this.handleChange} />
             );
         }
     }
+    WithLocalStorage.displayName = `_WithLocalStorage(${getDisplayName(Component)})`;
+    return WithLocalStorage;
 }

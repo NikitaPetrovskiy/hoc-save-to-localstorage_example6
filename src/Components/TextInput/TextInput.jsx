@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export const TextInput = (props) => {
         return (
@@ -9,4 +10,13 @@ export const TextInput = (props) => {
                 {props.children}
             </div>
         )
+}
+TextInput.propTypes = {
+    type: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    className: PropTypes.string,
+    id: PropTypes.string,
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
+    children: PropTypes.node
 }

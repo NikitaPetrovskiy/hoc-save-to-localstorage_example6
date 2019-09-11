@@ -10,10 +10,10 @@ const onClick = e => e.preventDefault();
 const App = (props) => {
   return (
     <div className="App">
-        <InputWithLocalStorage className="autocomplete">
+        <InputWithLocalStorage type="text" className="autocomplete">
             <input type="submit" value="Отправить" onClick={onClick}/>
         </InputWithLocalStorage>
-      <InputWithLocalStorageToo className="autocomplete" placeholder='save to localStorage'>
+      <InputWithLocalStorageToo type="text" className="autocomplete" placeholder='save to localStorage'>
           <input type="submit" value="Отправить" onClick={onClick}/>
       </InputWithLocalStorageToo>
     </div>
